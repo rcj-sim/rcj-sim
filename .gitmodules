@@ -5,3 +5,6 @@
 	path = libs/osg
 	url = https://github.com/openscenegraph/OpenSceneGraph.git
 	branch = OpenSceneGraph-3.6
+[submodule "mockup"]
+	path = mockup
+	url = ../mockup
