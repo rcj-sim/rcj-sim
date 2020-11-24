@@ -28,8 +28,8 @@ ELSE()
 
 	# export library paths to parent scope
 	set(BULLET_FOUND TRUE PARENT_SCOPE)
-	set(BULLET_INCLUDE_DIRS "libs/bullet3/src" PARENT_SCOPE)
-	set(BULLET_LIBRARIES "LinearMath;Bullet3Common;BulletInverseDynamics;BulletCollision;BulletDynamics;BulletSoftBody" PARENT_SCOPE)
+	set(BULLET_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/bullet3/src" PARENT_SCOPE)
+	set(BULLET_LIBRARIES "BulletInverseDynamics;BulletDynamics;BulletSoftBody;BulletCollision;LinearMath" PARENT_SCOPE)
 ENDIF()
 
 option(RCJSIM_USE_SYSTEM_OSG "Use system-wide install of OpenSceneGraph instead of building it yourself." OFF)
@@ -53,9 +53,6 @@ ELSE()
 	# use bleeding edge technology from 2008
 	set(OPENGL_PROFILE "GLCORE" CACHE STRING "OpenSceneGraph OpenGL profile")
 
-	# link osg with openthreads statically, because why not
-	set(DYNAMIC_OPENTHREADS OFF CACHE BOOL "Link OpenThreads dynamically.")
-
 	# disable unneeded features
 	set(OSG_USE_DEPRECATED_API OFF CACHE BOOL "Build OpenSceneGraph deprecated API")
 	set(BUILD_OSG_APPLICATIONS OFF CACHE BOOL "Build OpenSceneGraph applications")
@@ -73,7 +70,7 @@ ELSE()
 
 	# export library paths to parent scope
 	set(OPENSCENEGRAPH_FOUND TRUE PARENT_SCOPE)
-	set(OPENSCENEGRAPH_INCLUDE_DIRS "libs/osg/include" PARENT_SCOPE)
+	set(OPENSCENEGRAPH_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/osg/include" PARENT_SCOPE)
 	set(OPENSCENEGRAPH_LIBRARIES "osg;OpenThreads" PARENT_SCOPE)
 	set(OSGVIEWER_LIBRARY "osgViewer" PARENT_SCOPE)
 	set(OSGGA_LIBRARY "osgGA" PARENT_SCOPE)
