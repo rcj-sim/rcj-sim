@@ -50,6 +50,9 @@ IF(${RCJSIM_USE_SYSTEM_OSG})
 ELSE()
 	message("Building own OSG")
 
+	# if someone knows how to get osg to link with opengl correctly, tell me:
+	find_package(OpenGL 3.1 REQUIRED)
+
 	# use bleeding edge technology from 2008
 	set(OPENGL_PROFILE "GLCORE" CACHE STRING "OpenSceneGraph OpenGL profile")
 
@@ -64,14 +67,11 @@ ELSE()
 	set(BUILD_OSG_PLUGIN_JPEG ON)
 
 	add_subdirectory(osg)
-	# if someone knows how to get osg to link with opengl correctly, tell me:
-	find_package(OpenGL 3.1 REQUIRED)
-	target_link_libraries(osg ${OPENGL_LIBRARIES})
 
 	# export library paths to parent scope
 	set(OPENSCENEGRAPH_FOUND TRUE PARENT_SCOPE)
 	set(OPENSCENEGRAPH_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/osg/include;${CMAKE_CURRENT_BINARY_DIR}/osg/include" PARENT_SCOPE)
-	set(OPENSCENEGRAPH_LIBRARIES "osg;OpenThreads" PARENT_SCOPE)
+	set(OPENSCENEGRAPH_LIBRARIES "osg;OpenThreads;${OPENGL_LIBRARIES}" PARENT_SCOPE)
 	set(OSGVIEWER_LIBRARY "osgViewer" PARENT_SCOPE)
 	set(OSGGA_LIBRARY "osgGA" PARENT_SCOPE)
 ENDIF()
