@@ -13,7 +13,17 @@ There is already a small prototype that I use for experimenting with the
 physics engine, Bullet, and OpenSceneGraph in the submodule `mockup`.
 
 ## Building
-All of this is tested on Arch Linux.
+If you run into trouble because the libraries in your distribution do
+not have version numbers that are high enough, please lower the version
+numbers in the `libs/CMakeLists.txt` and try out whether it your version
+of the library works.
+Currently, this is more likely than not.
+If it does, create a pull request to lower the version numbers.
+
+I did not test whether this can be built on Windows, but if you get it to
+work, please create a pull request with your changes.
+
+## Dependencies
 rcj-sim requires a recent compiler supporting at least the C++17 standard.
 It also requires [CMake](https://cmake.org) as its build system.
 It depends on [Bullet](https://pybullet.org/wordpress/) as a physics
@@ -29,39 +39,40 @@ corresponding header files installed.
 OpenSceneGraph has some more dependencies, install these as needed.
 CMake will tell you what is missing.
 
-If you run into trouble because the libraries in your distribution do
-not have version numbers that are high enough, please lower the version
-numbers in the `libs/CMakeLists.txt` and try out whether it your version
-of the library works.
-Currently, this is more likely than not.
-If it does, create a pull request to lower the version numbers.
+On a freshly installed Debian Buster, I had to install these packages:
+- `git` for checking out the project.
+- `cmake` for configuration.
+- `clang` as a C++ compiler. `g++` will work, too, if you have that
+	installed.
+- `libgl-dev` as a dependency of OpenSceneGraph.
+So, for example, do
+```
+apt install git cmake clang libgl-dev
+```
 
-I did not test whether this can be built on Windows, but if you get it to
-work, please tell me or create a pull request.
 
 ### Build instructions
-* Clone/Download the repository.
-* Initialize git submodules: On the shell, do
-```
-git submodule init
-git submodule update
-```
-* Create a directory `build`.
-In-source builds are not officially supported.
-```
-mkdir build
-```
-* Change to that directory and on the shell, run `cmake ..`.
-This will configure the build.
-```
-cd build
-cmake ..
-```
-There are some build options which are not documented yet.
-* Then, as usual, run `make`.
-```
-make
-```
+- Clone/Download the repository.
+- Initialize git submodules: On the shell, do
+    ```
+    git submodule update --init --depth 1
+    ```
+- Create a directory `build`.
+    In-source builds are not officially supported.
+    ```
+    mkdir build
+    ```
+- Change to that directory and on the shell, run `cmake ..`.
+    This will configure the build.
+    ```
+    cd build
+    cmake ..
+    ```
+    There are some build options which are not documented yet.
+- Then, as usual, run `make`.
+    ```
+    make
+    ```
 
 ## License
 This program is free software:
