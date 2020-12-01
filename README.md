@@ -9,6 +9,9 @@ motivation.
 Also, this opens up great possibilities of discussion with future users
 and other people interested in contributing.
 
+Project planning happens in the [project planning
+repository](https://github.com/rcj-sim/project-planning).
+
 There is already a small prototype that I use for experimenting with the
 physics engine, Bullet, and OpenSceneGraph in the submodule `mockup`.
 
